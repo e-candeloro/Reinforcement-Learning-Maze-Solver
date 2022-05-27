@@ -13,7 +13,7 @@ All credit for the snippets used goes to the original author(s)
 """
 
 # path and name of the labyrinth csv file, if imported
-LABYRINT_FILE = "labyrinth.csv"
+LABYRINTH_FILE = "labyrinth.csv"
 
 
 class TDAgent:
@@ -210,7 +210,7 @@ class Environment:
 
         return
 
-    def init_labyrinth_from_csv(self, path=LABYRINT_FILE):
+    def init_labyrinth_from_csv(self, path=LABYRINTH_FILE):
         """
         Import the labirynth from a csv file.
         The file must have no headers,must use only the 4 allowed symbols,must have only one start and only one finish value.
