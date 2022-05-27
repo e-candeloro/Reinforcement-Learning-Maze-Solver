@@ -1,4 +1,4 @@
-# Agent navigation in a maze using TD Reinforcement Learning
+# Agent navigation in a maze using TD/Q-Learning Reinforcement Learning
 
 This is the second homework done for the course of Automated Decision Making (2021-2022) at the University of Modena and Reggio Emilia.
 It consists of a Python script that executes a RL algorithm (Temporal Difference/Q-Learning) that trains an agent inside a labyrinth to find the exit with the least number of steps possible.
