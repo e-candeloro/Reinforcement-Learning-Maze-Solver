@@ -73,6 +73,7 @@ The images below show the maze used, the agent in action and the learned policy.
 
 ## Important Notes
 More comments and explanations are present in the H2_CANDELORO_python.py script.
+Also all the readme was originally wrote in the H2_CANDELORO_description.pdf
 
 The following code was adapted
 and reformatted from a previous exercise done for the course of Machine Learning and Deep Learning (2020-2021) at the
