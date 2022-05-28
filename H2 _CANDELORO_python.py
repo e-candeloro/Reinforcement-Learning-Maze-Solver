@@ -27,6 +27,7 @@ class TDAgent:
     - get_action_greedy: perform the action using the learned greedy policy
     - get_action_symb: returns the action symbol (for printing purposes)
     - update_Q_function: performs the TD step to update the policy on the fly inside an episode
+    - __repr__: prints the Q function (matrix) for all the possible actions-states
 
     """
     # DEFINE THE ACTION SYMBOLS
@@ -38,7 +39,21 @@ class TDAgent:
         self.epsilon = epsilon
         self.num_actions = len(self.ACTIONS)
         self.rows, self.columns = lab_matrix_shape
+        # initializing the policy matrix Q to random values
         self.Q = np.random.rand(self.rows, self.columns, self.num_actions)
+        # NOTE: it is not necessary to set Q(y_final,x_final,.) = (0,0,0,0)
+        # because the simulation will stop when reaching the end of the maze
+
+    def __repr__(self):
+        """
+        Prints the Q policy matrix that associate the state (y_cor, x_cor) with the actions.
+        In this case, having a tensor, we print the Q matrix for every action possible.
+        """
+        for action in range(self.num_actions):
+            print(f"Q(y,x) for action: {action}\n")
+            print(str(np.round(self.Q[:, :, action], 2)) + "\n")
+
+        return ""
 
     def get_action_eps_greedy(self, state: tuple):
         """
@@ -379,13 +394,13 @@ class Environment:
         return self.lab_matrix.shape
 
 
-def main(n_episodes=150, alpha=1, gamma=1, epsilon=0.01, import_maze_csv=False, show_training=False):
+def main(n_episodes=100, alpha=1, gamma=1, epsilon=0.01, import_maze_csv=False, show_training=False):
     """
     Execute the RL algorithm for an agent that must find and exit in a maze, given a starting position.
 
     Parameters
     ----------
-    n_episodes: int (default is 150)
+    n_episodes: int (default is 100)
         number of episoded for training the RL algorithm
 
     alpha: int (default is 1)
@@ -452,13 +467,19 @@ def main(n_episodes=150, alpha=1, gamma=1, epsilon=0.01, import_maze_csv=False, 
             if is_over:  # if the agent reaches the end, terminate the episode
                 break
 
-        print(f'Episode: {e} - Tot Steps: {steps} Tot Reward: {tot_reward}')
+        print(f'Episode: {e+1} - Tot Steps: {steps} Tot Reward: {tot_reward}')
+        if show_training:
+            time.sleep(0.5)
         # shows the total reward obtained in every episode
         # if the algorithm works, we expect a maximization of the reward over each episode
-
+    
+    # show the Q function values for every pair state-action
+    print('\nQ FUNCTION LEARNED:\n')
+    print(agent)
     # show the learned policy as preferred actions in the labyrinth
-    print('\n\nLearned Policy:\n')
+    print('\n\nLEARNED POLICY:\n')
     print(environment.policy_str(agent))
+    
 
     # test the learned policy using only the greedy approach
     input('\n\nPress `ENTER` to start testing the learned policy.')
@@ -485,13 +506,14 @@ def main(n_episodes=150, alpha=1, gamma=1, epsilon=0.01, import_maze_csv=False, 
         counter += 1
 
         if is_over:  # if the agent reaches the end, end the loop
+            time.sleep(0.5)
             os.system('cls' if os.name == 'nt' else 'clear')  # clear screen
             print(f"step {counter}\n")
             print(environment)
             print("\nFinish!")
             return
 
-        time.sleep(0.3)
+        time.sleep(0.5)
 
 
 if __name__ == '__main__':
