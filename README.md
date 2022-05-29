@@ -9,6 +9,7 @@ The default maze for the agent to escape is the following (image)
 ![maze](images/maze.jpg)
 
 ### Considerations
+- The maze is represented with a number matrix, with 0 for the white squares and 1 for the walls (special values are used for the start and finish positions)
 - At each step the agent occupies one of the white squares.
 - At each step the agent has 4 possible actions: up, down, left,
 right.
@@ -61,11 +62,11 @@ and the **”is_over”** flag (to understand if the agent has reached the exit 
 At the end of the training, to show the results, a version of the maze with the learned policy is printed. 
 After pressing
 ENTER, a small simulation is executed to show how the agents follows the learned policy to reach the end of the maze. 
-A simple loop where only the greedy policy Q(S,A) is used for this purpose.
+A simple loop (where the greedy policy Q(S,A) is exploited) is used for this purpose.
 
 
 The algorithm was also tested with a custom
-maze from the labyrint.csv file. 
+maze from the labyrinth.csv file. 
 
 The images below show the maze used, the agent in action and the learned policy.
 
